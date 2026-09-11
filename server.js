@@ -78,6 +78,61 @@ app.use(rateLimitMiddleware);
 
 // Routes
 routes(app);
+
+// Root Health Check Route
+app.get('/', (req, res) => {
+    res.json({
+        success: true,
+        service: 'VillagKart Consumer API',
+        status: 'ONLINE',
+        documentation: '/docs',
+        timestamp: new Date().toISOString()
+    });
+});
+
+// Juspay / Payment Return URL Landing Page
+app.get('/return', (req, res) => {
+    const { status, order_id, signature, status_id } = req.query;
+    const isSuccess = status === 'CHARGED';
+    
+    res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Status - VillagKart</title>
+  <style>
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0b1329; color: #f8fafc; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+    .card { background: #1e293b; border: 1px solid #334155; border-radius: 18px; padding: 36px; max-width: 460px; width: 100%; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); }
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border-radius: 9999px; font-weight: 700; font-size: 14px; margin-bottom: 22px; letter-spacing: 0.5px; }
+    .success { background: #064e3b; color: #34d399; border: 1px solid #059669; }
+    .failed { background: #7f1d1d; color: #fca5a5; border: 1px solid #dc2626; }
+    h1 { margin: 0 0 10px; font-size: 24px; font-weight: 700; }
+    p { color: #94a3b8; font-size: 15px; margin-bottom: 24px; line-height: 1.5; }
+    .details { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 18px; text-align: left; margin-bottom: 24px; font-size: 14px; }
+    .row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+    .row:last-child { margin-bottom: 0; }
+    .label { color: #64748b; font-weight: 500; }
+    .val { color: #e2e8f0; font-family: monospace; font-size: 13px; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge ${isSuccess ? 'success' : 'failed'}">
+      ${isSuccess ? '✔ PAYMENT SUCCESSFUL' : '✖ PAYMENT ' + (status || 'FAILED')}
+    </div>
+    <h1>${isSuccess ? 'Thank You for Your Order!' : 'Payment Incomplete'}</h1>
+    <p>${isSuccess ? 'Your payment has been successfully processed and charged via Juspay.' : 'The transaction was not completed. Please try again.'}</p>
+    <div class="details">
+      <div class="row"><span class="label">Order ID</span><span class="val">${order_id || 'N/A'}</span></div>
+      <div class="row"><span class="label">Status</span><span class="val">${status || 'UNKNOWN'}</span></div>
+      ${status_id ? `<div class="row"><span class="label">Status ID</span><span class="val">${status_id}</span></div>` : ''}
+    </div>
+  </div>
+</body>
+</html>`);
+});
+
 app.use(errorMiddleware);
 
 app.use('*', (req, res) => {

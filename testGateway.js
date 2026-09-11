@@ -16,7 +16,7 @@ async function testGateway() {
       customerId: 'test_customer_123',
       customerEmail: 'test@example.com',
       customerPhone: '9876543210',
-      returnUrl: 'http://localhost:3000/return'
+      returnUrl: 'https://juspay-5b6q.onrender.com/return'
     });
 
     console.log('✅ GATEWAY IS WORKING PERFECTLY!\n');
