@@ -1,0 +1,55 @@
+name: Consumer API Deploy
+
+on:
+  push:
+    branches:
+      - erp/dev
+
+concurrency:
+  group: consumer-api-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy Consumer API
+        uses: appleboy/ssh-action@v1.2.0
+
+        with:
+          host: ${{ secrets.DEV_EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.DEV_EC2_SSH_KEY }}
+
+          script: |
+            set -e
+
+            export PATH=$PATH:/home/ubuntu/n/bin
+
+            cd /opt/apps/villagkart/erp-dev/consumer_api
+
+            echo "Updating repository..."
+
+            git checkout erp/dev
+            git fetch origin erp/dev
+            git reset --hard origin/erp/dev
+
+            echo "Installing dependencies..."
+
+            npm ci
+
+            echo "Generating Prisma client..."
+
+            npx prisma generate
+
+            echo "Running database migrations..."
+
+            npx prisma migrate deploy
+
+            echo "Restarting PM2 application..."
+
+            pm2 restart test-erp-consumer
+            pm2 save
+
+            echo "Consumer API deployment completed successfully."

@@ -1,0 +1,52 @@
+name: Consumer API Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: Consumer-api-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy Consumer API
+        uses: appleboy/ssh-action@v1.2.0
+
+        with:
+          host: ${{ secrets.PROD_EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.PROD_EC2_SSH_KEY }}
+
+          script: |
+            set -e
+
+            cd /var/www/villagkart/villagkart-consumer-api
+
+            echo "Updating repository..."
+
+            git checkout master
+            git pull origin master
+
+            echo "Installing dependencies..."
+
+            npm install
+
+            echo "Generating Prisma client..."
+
+            npx prisma generate
+
+            echo "Running database migrations..."
+
+            npx prisma migrate deploy
+
+            echo "Restarting PM2 application..."
+
+            pm2 restart consumer
+            pm2 save
+
+            echo "PROD Consumer API deployment completed successfully."

@@ -1,0 +1,57 @@
+import { header } from "express-validator";
+
+export const exportColumns = {
+  user: [
+    { header: "User ID", key: "id" },
+    { header: "Name", key: "name" },
+    { header: "Phone", key: "phone" },
+    { header: "Email", key: "email" },
+    { header: "Role", key: "role" },
+    { header: "Region", key: "region" },
+    { header: "Vehicle Type", key: "vehicleType" },
+    { header: "Address", key: "address" }, // 👈 important
+    { header: "Warehouse", key: "warehouseName" },
+    { header: "Is Active", key: "isActive" },
+    { header: "Is Verified", key: "isVerified" },
+    { header: "Is Online", key: "isOnline" },
+    { header: "Created At", key: "createdAt" },
+    { header: "Updated At", key: "updatedAt" },
+  ],
+
+  order: [
+    { header: "Order ID", key: "id" },
+    { header: "Order Number", key: "orderNumber" },
+    { header: "Status", key: "status" },
+    { header: "Total Amount (₹)", key: "totalAmount" },
+    { header: "Delivery Charge", key: "deliveryCharge" },
+    { header: "Discount", key: "discount" },
+    { header: "Delivery Slot", key: "deliverySlot" },
+    { header: "Delivery Date", key: "deliveryDate" },
+    { header: "Consumer Name", key: "consumerName" },
+    { header: "Agent Name", key: "agentName" },
+    { header: "Warehouse Name", key: "warehouseName" },
+    { header: "Created At", key: "createdAt" },
+    { header: "Updated At", key: "updatedAt" },
+  ],
+
+  product: [
+    { header: "Product ID", key: "id" },
+    { header: "Product Name", key: "name" },
+    { header: "Description", key: "description" },
+    { header: "Selling Price (₹)", key: "price" },
+    { header: "MRP (₹)", key: "mrp" },
+    { header: "Category", key: "category" },
+    { header: "Sub Category", key: "subCategory" },
+    { header: "Brand", key: "brand" },
+    { header: "Unit", key: "unit" },
+    { header: "Stock", key: "stock" },
+    { header: "Threshold", key: "threshold" },
+    { header: "Is Active", key: "isActive" },
+    { header: "Warehouse", key: "warehouseName" },
+    { header: "Supplier", key: "supplierName" },
+    { header: "Tags", key: "tags" },
+    { header: "Weight", key: "weight" },
+    { header: "Created At", key: "createdAt" },
+    { header: "Updated At", key: "updatedAt" },
+  ],
+};

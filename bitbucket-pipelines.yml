@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=.vscode/yaml/empty-schema.json
+image: atlassian/default-image:3
+ 
+pipelines:
+  branches:
+ 
+    dev:
+      - step:
+          name: Deploy Consumer API (DEV)
+          script:
+            - apt-get update && apt-get install -y openssh-client
+            - ssh -o StrictHostKeyChecking=no ubuntu@3.7.204.189 "/var/www/villagkart-cusumer-api/deploy.sh"
+ 
+    master:
+      - step:
+          name: Deploy Consumer API (PROD)
+          deployment: production
+          script:
+            - mkdir -p ~/.ssh
+            - ssh-keyscan -H 13.234.196.216 >> ~/.ssh/known_hosts
+            - ssh ubuntu@13.234.196.216 "/usr/local/bin/deploy-consumer.sh"

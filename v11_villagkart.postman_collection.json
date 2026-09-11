@@ -1,0 +1,960 @@
+{
+  "info": {
+    "_postman_id": "f5e1b239-1234-5678-abcd-123456789abc",
+    "name": "v11_villagkart_Multi-Language",
+    "description": "Collection exclusively for testing the multi-language (i18n) functionality via Accept-Language headers and lang query parameters.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Shop by Need (Categories)",
+      "item": [
+        {
+          "name": "Fetch Categories (Check categoryType)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{consumer_url}}/api/v1/categories?pincode={{pincode}}",
+              "host": [
+                "{{consumer_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "categories"
+              ],
+              "query": [
+                {
+                  "key": "pincode",
+                  "value": "{{pincode}}"
+                }
+              ]
+            },
+            "description": "Fetches categories. Look for the `categoryType` array in the response to filter out `SPECIAL` categories for the 'Shop by Need' section."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Categories - Telugu (te)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "te",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/categories?pincode={{pincode}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "categories"
+          ],
+          "query": [
+            {
+              "key": "pincode",
+              "value": "{{pincode}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Categories - Hindi (hi)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "hi",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/categories?pincode={{pincode}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "categories"
+          ],
+          "query": [
+            {
+              "key": "pincode",
+              "value": "{{pincode}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Categories - Marathi (mr)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "mr",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/categories?pincode={{pincode}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "categories"
+          ],
+          "query": [
+            {
+              "key": "pincode",
+              "value": "{{pincode}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Categories - Telugu (lang query param)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/categories?pincode={{pincode}}&lang=te",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "categories"
+          ],
+          "query": [
+            {
+              "key": "pincode",
+              "value": "{{pincode}}"
+            },
+            {
+              "key": "lang",
+              "value": "te"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Categories - Fallback (Unsupported)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "tamil",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/categories?pincode={{pincode}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "categories"
+          ],
+          "query": [
+            {
+              "key": "pincode",
+              "value": "{{pincode}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Serviceability",
+      "item": [
+        {
+          "name": "Check Serviceability (GET)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{consumer_base_url}}/api/v1/serviceability?pincode=501500",
+              "host": [
+                "{{consumer_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "serviceability"
+              ],
+              "query": [
+                {
+                  "key": "pincode",
+                  "value": "501500"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Notify Location Waitlist (POST)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"mobileNumber\": \"9876543210\",\n    \"pincode\": \"999999\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{consumer_base_url}}/api/v1/serviceability/notify",
+              "host": [
+                "{{consumer_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "serviceability",
+                "notify"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Consumer Cart (Tiered Pricing)",
+      "item": [
+        {
+          "name": "Add 1 Item (Base Price)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{consumer_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": \"{{product_id}}\",\n  \"quantity\": 1,\n  \"action\": \"increment\",\n  \"warehouseId\": \"90bba17c-3ee8-4007-ab3f-c4a6e772d6fc\"\n}"
+            },
+            "url": {
+              "raw": "{{consumer_url}}/api/v1/cart",
+              "host": [
+                "{{consumer_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cart"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add 5 Items (Tier 1)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{consumer_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": \"{{product_id}}\",\n  \"quantity\": 5,\n  \"action\": \"increment\",\n  \"warehouseId\": \"90bba17c-3ee8-4007-ab3f-c4a6e772d6fc\"\n}"
+            },
+            "url": {
+              "raw": "{{consumer_url}}/api/v1/cart",
+              "host": [
+                "{{consumer_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cart"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add 15 Items (Tier 2)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{consumer_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": \"{{product_id}}\",\n  \"quantity\": 15,\n  \"action\": \"increment\",\n  \"warehouseId\": \"90bba17c-3ee8-4007-ab3f-c4a6e772d6fc\"\n}"
+            },
+            "url": {
+              "raw": "{{consumer_url}}/api/v1/cart",
+              "host": [
+                "{{consumer_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cart"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Virtual Bundle System",
+      "item": [
+        {
+          "name": "Get All Active Bundles (Consumer)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{consumer_url}}/api/v1/bundles",
+              "host": [
+                "{{consumer_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bundles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Bundle (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Breakfast Saver Bundle\",\n  \"description\": \"Bread, Milk, and Eggs\",\n  \"bundlePrice\": 120,\n  \"mrp\": 150,\n  \"items\": [\n    {\n      \"productId\": \"replace-with-product-id-1\",\n      \"quantity\": 1\n    },\n    {\n      \"productId\": \"replace-with-product-id-2\",\n      \"quantity\": 1\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{admin_url}}/api/v1/bundles",
+              "host": [
+                "{{admin_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bundles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Bundle to Cart (Consumer)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{user_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bundleId\": \"replace-with-bundle-id\",\n  \"quantity\": 1,\n  \"type\": \"inc\",\n  \"warehouseId\": \"9f337243-9b4c-4fb1-9ce5-05ed5a2acfb7\"\n}"
+            },
+            "url": {
+              "raw": "{{consumer_url}}/api/v1/cart/items",
+              "host": [
+                "{{consumer_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "cart",
+                "items"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Refund System",
+      "item": [
+        {
+          "name": "Consumer - Create Return Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{consumer_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"orderItemId\": \"item_123\",\n      \"quantity\": 1,\n      \"reason\": \"Defective\"\n    }\n  ],\n  \"reason\": \"Received damaged product\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{consumer_base_url}}/api/v1/orders/{{order_id}}/returns",
+              "host": [
+                "{{consumer_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "{{order_id}}",
+                "returns"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Consumer - Get Return Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{consumer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{consumer_base_url}}/api/v1/orders/{{order_id}}/returns",
+              "host": [
+                "{{consumer_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "{{order_id}}",
+                "returns"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Partner - Get Return Requests",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{partner_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{partner_base_url}}/api/v1/partner/return-requests",
+              "host": [
+                "{{partner_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "partner",
+                "return-requests"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Partner - Approve Return Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{partner_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderItemId\": \"item_123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{partner_base_url}}/api/v1/partner/return-requests/{{return_id}}/approve",
+              "host": [
+                "{{partner_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "partner",
+                "return-requests",
+                "{{return_id}}",
+                "approve"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Partner - Reject Return Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{partner_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderItemId\": \"item_123\",\n  \"reason\": \"Cannot reproduce defect\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{partner_base_url}}/api/v1/partner/return-requests/{{return_id}}/reject",
+              "host": [
+                "{{partner_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "partner",
+                "return-requests",
+                "{{return_id}}",
+                "reject"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Admin OMS - Process Refund Execution",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{admin_base_url}}/api/v1/admin/oms/refunds/{{return_id}}/process",
+              "host": [
+                "{{admin_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "oms",
+                "refunds",
+                "{{return_id}}",
+                "process"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Consumer - Initiate Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{consumer_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orderId\": \"{{order_id}}\",\n  \"method\": \"COD\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{consumer_base_url}}/api/v1/payments/initiate",
+          "host": [
+            "{{consumer_base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "payments",
+            "initiate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Pricing Engine",
+      "item": [
+        {
+          "name": "Get Supported Channels",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{partner_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{partner_base_url}}/api/v1/pricing/channels",
+              "host": [
+                "{{partner_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "pricing",
+                "channels"
+              ]
+            },
+            "description": "Get supported pricing channels (ONLINE, VEHICLE, POS)."
+          },
+          "response": []
+        },
+        {
+          "name": "Create or Update Price Book",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{partner_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Online Channel Price Book\",\n  \"code\": \"ONLINE\",\n  \"isActive\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{partner_base_url}}/api/v1/pricing/price-books",
+              "host": [
+                "{{partner_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "pricing",
+                "price-books"
+              ]
+            },
+            "description": "Creates or updates a Price Book for the partner's warehouse."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Price Books",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{partner_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{partner_base_url}}/api/v1/pricing/price-books",
+              "host": [
+                "{{partner_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "pricing",
+                "price-books"
+              ]
+            },
+            "description": "Fetch all price books."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Price Book",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{partner_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{partner_base_url}}/api/v1/pricing/price-books/{{pricebook_id}}",
+              "host": [
+                "{{partner_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "pricing",
+                "price-books",
+                "{{pricebook_id}}"
+              ]
+            },
+            "description": "Deletes a Price Book by ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Assign Product Price Override",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{partner_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": \"{{product_id}}\",\n  \"priceBookId\": \"{{pricebook_id}}\",\n  \"sellingPrice\": 62.00,\n  \"mrp\": 65.00,\n  \"effectiveFrom\": \"2026-07-29T00:00:00.000Z\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{partner_base_url}}/api/v1/pricing/product-prices",
+              "host": [
+                "{{partner_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "pricing",
+                "product-prices"
+              ]
+            },
+            "description": "Assigns a custom price override for a specific product and price book."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product Price Override",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{partner_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{partner_base_url}}/api/v1/pricing/product-prices/{{product_price_id}}",
+              "host": [
+                "{{partner_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "pricing",
+                "product-prices",
+                "{{product_price_id}}"
+              ]
+            },
+            "description": "Deletes a product price override by ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Resolve Product Price",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{partner_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{partner_base_url}}/api/v1/pricing/prices?productId={{product_id}}&channel=ONLINE",
+              "host": [
+                "{{partner_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "pricing",
+                "prices"
+              ],
+              "query": [
+                {
+                  "key": "productId",
+                  "value": "{{product_id}}"
+                },
+                {
+                  "key": "channel",
+                  "value": "ONLINE"
+                }
+              ]
+            },
+            "description": "Resolves the price of a product for a specific channel."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Price Comparison",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{partner_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{partner_base_url}}/api/v1/pricing/prices/comparison",
+              "host": [
+                "{{partner_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "pricing",
+                "prices",
+                "comparison"
+              ]
+            },
+            "description": "Retrieves the side-by-side comparison of base prices and pricebook overrides."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product Price History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{partner_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{partner_base_url}}/api/v1/pricing/prices/history?productId={{product_id}}",
+              "host": [
+                "{{partner_base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "pricing",
+                "prices",
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "productId",
+                  "value": "{{product_id}}"
+                }
+              ]
+            },
+            "description": "Retrieves price adjustment history logs."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

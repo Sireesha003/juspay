@@ -1,0 +1,3 @@
+-- No-op: `AuditLog` and `AuditOutbox` are created in `20260506124500_add_audit_log_phase1`.
+-- This folder previously contained ALTERs that ran before those CREATEs (lexicographic order),
+-- which breaks `prisma migrate dev` shadow database replay (P1014).

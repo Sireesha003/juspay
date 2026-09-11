@@ -1,0 +1,122 @@
+{
+  "info": {
+    "name": "21. Vehicles & Village Schedule",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Vehicles (Auto Location / Saved Address)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{authToken}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/vehicles",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "vehicles"]
+        }
+      }
+    },
+    {
+      "name": "Get Vehicles by Pincode (Auto Warehouse Lookup)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{authToken}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/vehicles?pincode={{pincode}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "vehicles"],
+          "query": [
+            { "key": "pincode", "value": "{{pincode}}" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Vehicles by Warehouse ID or Code",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{authToken}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/vehicles?warehouseId={{warehouseId}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "vehicles"],
+          "query": [
+            { "key": "warehouseId", "value": "{{warehouseId}}" },
+            { "key": "customerVillage", "value": "Anakapalle" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Track Vehicle Real-Time",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{authToken}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/vehicles/{{vehicleId}}/track",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "vehicles", "{{vehicleId}}", "track"]
+        }
+      }
+    },
+    {
+      "name": "Get Village Schedule Overview (Auto Pincode)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{authToken}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/delivery/schedule?pincode={{pincode}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "delivery", "schedule"],
+          "query": [
+            { "key": "pincode", "value": "{{pincode}}" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Serviceable Villages List",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{authToken}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/delivery/schedule/villages?pincode={{pincode}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "delivery", "schedule", "villages"],
+          "query": [
+            { "key": "pincode", "value": "{{pincode}}" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Village Schedule Detail",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{authToken}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/delivery/schedule/detail?villageName=Route A - Vizag Rural",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "delivery", "schedule", "detail"],
+          "query": [
+            { "key": "villageName", "value": "Route A - Vizag Rural" }
+          ]
+        }
+      }
+    }
+  ]
+}
