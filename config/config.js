@@ -1,17 +1,37 @@
 // config/config.js
 import fs from 'fs'
 import { parseDuration } from '../utils/timeParser.js'
-let privateKey, publicKey
+import { generateKeyPairSync } from 'crypto'
+import { join } from 'path'
 
-try {
-  privateKey = fs.readFileSync('keys/private.key', 'utf8')
-  publicKey = fs.readFileSync('keys/public.key', 'utf8')
-} catch (error) {
-  console.error('❌ Error reading JWT key files:', error.message)
-  console.error(
-    '💡 Solution: Run "node generateKeys.js" to generate the required RSA keys'
-  )
-  process.exit(1) // Exit if keys are missing
+let privateKey = process.env.JWT_PRIVATE_KEY ? process.env.JWT_PRIVATE_KEY.replace(/\\n/g, '\n') : null
+let publicKey = process.env.JWT_PUBLIC_KEY ? process.env.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null
+
+if (!privateKey || !publicKey) {
+  const keysDir = join(process.cwd(), 'keys')
+  const privateKeyPath = join(keysDir, 'private.key')
+  const publicKeyPath = join(keysDir, 'public.key')
+
+  try {
+    if (!fs.existsSync(privateKeyPath) || !fs.existsSync(publicKeyPath)) {
+      if (!fs.existsSync(keysDir)) {
+        fs.mkdirSync(keysDir, { recursive: true })
+      }
+      const pair = generateKeyPairSync('rsa', {
+        modulusLength: 2048,
+        publicKeyEncoding: { type: 'spki', format: 'pem' },
+        privateKeyEncoding: { type: 'pkcs8', format: 'pem' }
+      })
+      fs.writeFileSync(privateKeyPath, pair.privateKey)
+      fs.writeFileSync(publicKeyPath, pair.publicKey)
+      console.log('✅ Auto-generated RSA Keys in ./keys')
+    }
+    privateKey = fs.readFileSync(privateKeyPath, 'utf8')
+    publicKey = fs.readFileSync(publicKeyPath, 'utf8')
+  } catch (error) {
+    console.error('❌ Error reading/generating JWT key files:', error.message)
+    throw error
+  }
 }
 
 export default {

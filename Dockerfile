@@ -19,6 +19,9 @@ COPY . .
 # Generate Prisma client at build time
 RUN npx prisma generate
 
+# Generate JWT RSA keys if missing
+RUN node generateKeys.js
+
 # Remove dev dependencies after generating prisma (optional, keeps image small)
 RUN npm prune --production
 
@@ -26,4 +29,4 @@ RUN npm prune --production
 EXPOSE 3002
 
 # Run migrations then start app with pm2
-CMD sh -c "npx prisma migrate deploy && node ./node_modules/pm2/bin/pm2-runtime server.js"
+CMD sh -c "node generateKeys.js && npx prisma migrate deploy && node ./node_modules/pm2/bin/pm2-runtime server.js"
